@@ -18,16 +18,24 @@
     <script>
   
         function refreshTime() {
-          var dateString = new Date().toLocaleString("zh-CN", {timeZone: "America/Toronto"});
-          var timeDisplay = document.getElementById("time");
-          timeDisplay.innerHTML = dateString;
+            var date = new Date();
+
+            var year = date.toLocaleString("default", { year: "numeric" });
+            var month = date.toLocaleString("default", { month: "2-digit" });
+            var day = date.toLocaleString("default", { day: "2-digit" });
+            var hr = date.toLocaleString("default", { hour12: "2-digit" });
+
+            var dateString = year + "年" + month + "月" + day + "日 " + hr;
+            var timeDisplay = document.getElementById("time");
+            timeDisplay.innerHTML = dateString;
         }
         
         function refreshCalendar() {
-          var dateString = new Date().toLocaleString("zh-CN", {timeZone: "America/Toronto"});
-          var timeDisplay = document.getElementById("calendar-container");
-          var content = container.innerHTML;
-          container.innerHTML= content; 
+            var dateString = new Date().toLocaleString("zh-CN", {timeZone: "America/Toronto"});
+            var timeDisplay = document.getElementById("calendar-container");
+            var content = container.innerHTML;
+            var dateString = new Date().toLocaleString("zh-CN", {timeZone: "America/Toronto"});
+            container.innerHTML= content + "<p id=\"time\">Time</p>"; 
         }
 
         setInterval(refreshTime, 1000);
