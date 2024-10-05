@@ -15,9 +15,19 @@
             margin-top: 20px;
         }
     </style>
+    <script>
+        var timeDisplay = document.getElementById("time");
+        function refreshTime() {
+          var dateString = new Date().toLocaleString("en-US", {timeZone: "America/Sao_Paulo"});
+          var formattedString = dateString.replace(", ", " - ");
+          timeDisplay.innerHTML = formattedString;
+        }
+        
+        setInterval(refreshTime, 1000);
+    </script>
 </head>
 <body>
-    <h1>欢迎回家</h1>
+    <h1>欢迎回家</h1> <p id="time"></p>
     <div class="calendar-container">
         <!-- Paste your Google Calendar Embed Code here -->
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&bgcolor=%23AD1457&hl=zh_CN&showTitle=0&mode=AGENDA&showPrint=0&src=bGlsaXpoYW5nNzc3QGdtYWlsLmNvbQ&color=%23aa1a4c" style="border:solid 1px #777" width="300" height="600" frameborder="0" scrolling="no"></iframe>
