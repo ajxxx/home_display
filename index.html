@@ -23,23 +23,35 @@
             var year = date.toLocaleString("default", { year: "numeric" });
             var month = date.toLocaleString("default", { month: "2-digit" });
             var day = date.toLocaleString("default", { day: "2-digit" });
-            var hr = date.toLocaleString("default", { hour12: "2-digit" });
+            var hr = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            var mor = "上午";
+            
+            if (hr.includes("PM")){
+                var mor = "下午";
+            }
+            hr = hr.replace("PM", "")
+            hr = hr.replace("AM", "")
 
-            var dateString = year + "年" + month + "月" + day + "日 " + hr;
+            var dateString = year + "年" + month + "月" + day + "日   " + mor + hr;
             var timeDisplay = document.getElementById("time");
             timeDisplay.innerHTML = dateString;
         }
         
         function refreshCalendar() {
-            var dateString = new Date().toLocaleString("zh-CN", {timeZone: "America/Toronto"});
-            var timeDisplay = document.getElementById("calendar-container");
-            var content = container.innerHTML;
-            var dateString = new Date().toLocaleString("zh-CN", {timeZone: "America/Toronto"});
-            container.innerHTML= content + "<p id=\"time\">Time</p>"; 
+            var iframe = document.getElementById('calendar-container-lili');
+            iframe.src = iframe.src;
+            var iframe = document.getElementById('calendar-container-ellie');
+            iframe.src = iframe.src;
+            var iframe = document.getElementById('calendar-container-jayden');
+            iframe.src = iframe.src;
+            var timeDisplay = document.getElementById("reloadtime");
+            var date = new Date();
+            var dateString = date.toLocaleString("default", { hour12: "2-digit" });
+            timeDisplay.innerHTML = "reloadtime:" + dateString;
         }
 
-        setInterval(refreshTime, 1000);
-        setInterval(refreshCalendar, 300000);
+        setInterval(refreshTime, 60000);
+        setInterval(refreshCalendar, 1800000);
     </script>
 </head>
 <body>
@@ -47,13 +59,14 @@
     <div id="all-container">
         <div id="calendar-container">
             <!-- Paste your Google Calendar Embed Code here -->
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FToronto&bgcolor=%23F4511E&mode=AGENDA&hl=zh_CN&showTz=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showDate=0&src=bGlsaXpoYW5nNzc3QGdtYWlsLmNvbQ&color=%23aa1a4c" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FToronto&bgcolor=%234285F4&mode=AGENDA&hl=zh_CN&showTz=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showDate=0&src=MjE5Mjk4OGRkZWM0ZTU1NDk1MTdkZDk5NTk2N2RkMjI4NmVkOWIyMTk2MzgwMjhlZWVhOGFlMDhjNTJhMGZjYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23be4400" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FToronto&bgcolor=%239E69AF&mode=AGENDA&hl=zh_CN&showTz=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showDate=0&src=NDkwYzQ1YWViNzIxNjVhNDk1NDdmOGRiOGU4OTNhNjc2MDk2ODFmY2ZkMjA0YjZiZjNhNTJhOWNmN2FmNzhhM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%238c33b6" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe id = "calendar-container-lili" src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FToronto&bgcolor=%23F4511E&mode=AGENDA&hl=zh_CN&showTz=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showDate=0&src=bGlsaXpoYW5nNzc3QGdtYWlsLmNvbQ&color=%23aa1a4c" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe id = "calendar-container-ellie" src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FToronto&bgcolor=%234285F4&mode=AGENDA&hl=zh_CN&showTz=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showDate=0&src=MjE5Mjk4OGRkZWM0ZTU1NDk1MTdkZDk5NTk2N2RkMjI4NmVkOWIyMTk2MzgwMjhlZWVhOGFlMDhjNTJhMGZjYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23be4400" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe id = "calendar-container-jayden" src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FToronto&bgcolor=%239E69AF&mode=AGENDA&hl=zh_CN&showTz=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showDate=0&src=NDkwYzQ1YWViNzIxNjVhNDk1NDdmOGRiOGU4OTNhNjc2MDk2ODFmY2ZkMjA0YjZiZjNhNTJhOWNmN2FmNzhhM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%238c33b6" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
         </div>
         <div class="gotrain-container">
             
         </div>
+        <p id="reloadtime">reload-time:</p>
     </div>
 </body>
 </html>
